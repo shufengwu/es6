@@ -1,4 +1,4 @@
-"use strict";
+
 var a3 = 1;
 let b2 = 1;
 window.onload = function () {
@@ -79,26 +79,36 @@ window.onload = function () {
 
     // 情况一
     if (true) {
-        function f2() {}
+        function f2() { }
     }
 
     // 情况二
     try {
-        function f3() {}
+        function f3() { }
     } catch (e) {
         // ...
     }
+
+    console.log("----------------------函数声明-------------------------");
 
     function f4() {
         console.log('I am outside!');
     }
 
+    (function () {
+        if (false) {
+            // 重复声明一次函数f
+            function f4() {
+                console.log('I am inside!');
+            }
+        }
+        
+        f4();
+    }());
+
     // (function () {
+    //     function f4() { console.log('I am inside!'); }
     //     if (false) {
-    //         // 重复声明一次函数f
-    //         function f4() {
-    //             console.log('I am inside!');
-    //         }
     //     }
     //     f4();
     // }());
@@ -175,5 +185,22 @@ window.onload = function () {
     // 或者采用通用方法，写成 this.a
     console.log(window.a3); // 1
     console.log(window.b2); // undefined
+
+    // function bar(x = y, y = 2) {
+    //     return [x, y];
+    //   }
+
+    //   bar(); // 报错
+
+    console.log("----------------死区----------------");
+    console.log(typeof y);
+    let x;
+    x = x;
+
+    function f() { console.log('I am outside!'); }
+
+
+
+
 
 }
